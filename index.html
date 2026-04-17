@@ -6,89 +6,89 @@
 <title>Invitación Spider 🕷️</title>
 
 <style>
-  body {
-    margin:0;
-    font-family: Arial;
-    background:#001a4d;
-    color:white;
-    overflow:hidden;
-  }
+:root {
+  --red:#E3000F;
+  --blue:#003082;
+  --darkblue:#001a4d;
+  --yellow:#FFD700;
+  --white:#ffffff;
+}
 
-  /* INTRO */
-  #intro {
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    cursor:pointer;
-    background: radial-gradient(circle, #001a4d, #000);
-    text-align:center;
-  }
+body{
+  margin:0;
+  font-family:'Arial';
+  background:var(--darkblue);
+  overflow:hidden;
+}
 
-  #intro img {
-    width:180px;
-    animation: pulse 2s infinite;
-  }
+/* INTRO SOBRE */
+#intro{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle,#001a4d,#000);
+  color:white;
+  cursor:pointer;
+  text-align:center;
+}
 
-  @keyframes pulse {
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.1);}
-  }
+#intro img{
+  width:180px;
+  animation:pulse 2s infinite;
+}
 
-  #intro p {
-    margin-top:15px;
-    font-size:18px;
-    opacity:0.8;
-  }
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.1);}
+}
 
-  /* EFECTO DESAPARECER */
-  .fadeOut {
-    animation: fadeOut 0.6s forwards;
-  }
+.fadeOut{
+  animation:fadeOut .6s forwards;
+}
 
-  @keyframes fadeOut {
-    to {
-      opacity:0;
-      transform:scale(1.2);
-    }
-  }
+@keyframes fadeOut{
+  to{opacity:0;transform:scale(1.3);}
+}
 
-  /* CONTENIDO */
-  #contenido {
-    display:none;
-    padding:20px;
-    text-align:center;
-  }
+/* CONTENIDO ORIGINAL */
+#contenido{
+  display:none;
+  height:100vh;
+  overflow-y:auto;
+}
 
-  .card {
-    background:#003082;
-    padding:20px;
-    border-radius:20px;
-    border:3px solid red;
-    animation: aparecer 1s ease;
-  }
+.container{
+  max-width:480px;
+  margin:auto;
+  padding:20px;
+  text-align:center;
+}
 
-  @keyframes aparecer {
-    from {opacity:0; transform:translateY(40px);}
-    to {opacity:1; transform:translateY(0);}
-  }
+.card{
+  background:linear-gradient(145deg,var(--blue),var(--darkblue));
+  border:3px solid var(--red);
+  border-radius:20px;
+  padding:25px;
+  margin-top:20px;
+}
 
-  h1 {
-    font-size:40px;
-    margin:10px 0;
-  }
+h1{
+  font-size:50px;
+  color:white;
+}
 
-  .btn {
-    margin-top:20px;
-    padding:12px 20px;
-    border:none;
-    border-radius:10px;
-    background:#00c853;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-  }
+.btn{
+  margin-top:15px;
+  padding:12px 18px;
+  border:none;
+  border-radius:10px;
+  background:#00c853;
+  color:white;
+  cursor:pointer;
+  font-size:16px;
+}
 
 </style>
 </head>
@@ -101,58 +101,63 @@
   <p>🕷️ Tocá para abrir la invitación</p>
 </div>
 
-<!-- CONTENIDO -->
+<!-- CONTENIDO REAL -->
 <div id="contenido">
+
+<div class="container">
+
   <div id="saludo"></div>
 
   <div class="card">
     <h1>MATEO</h1>
-    <p>🎉 Cumple 6 años 🎉</p>
+    <h3 style="color:gold;">🎉 Cumple 6 años 🎉</h3>
+
     <p>📅 Sábado 25 de Abril</p>
     <p>🕓 16:00 hs</p>
     <p>📍 Salón El Castillo</p>
 
     <button class="btn" onclick="confirmar()">Confirmar por WhatsApp</button>
   </div>
+
+</div>
+
 </div>
 
 <!-- AUDIO -->
 <audio id="sonido">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-fast-woosh-transition-3108.mp3" type="audio/mpeg">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-fast-woosh-transition-3108.mp3">
 </audio>
 
 <script>
 
-function abrirInvitacion() {
+// ABRIR SOBRE
+function abrirInvitacion(){
   document.getElementById("sonido").play();
 
-  const intro = document.getElementById("intro");
+  const intro=document.getElementById("intro");
   intro.classList.add("fadeOut");
 
-  setTimeout(() => {
-    intro.style.display = "none";
-    document.getElementById("contenido").style.display = "block";
-  }, 600);
+  setTimeout(()=>{
+    intro.style.display="none";
+    document.getElementById("contenido").style.display="block";
+  },600);
 }
 
+// NOMBRE PERSONALIZADO
+const params=new URLSearchParams(window.location.search);
+const nombre=params.get("nombre");
 
-// PERSONALIZACIÓN POR NOMBRE
-const params = new URLSearchParams(window.location.search);
-const nombre = params.get("nombre");
-
-if (nombre) {
-  document.getElementById("saludo").innerHTML =
-    `<h2>👋 Hola ${nombre}, estás invitado</h2>`;
+if(nombre){
+  document.getElementById("saludo").innerHTML=
+  `<h2 style="color:gold;">👋 Hola ${nombre}</h2>`;
 }
-
 
 // WHATSAPP
-function confirmar() {
-  const mensaje = `Hola! Soy ${nombre || "invitado"} y confirmo asistencia al cumple 🎉`;
-  const telefono = "549XXXXXXXXXX"; // CAMBIAR
+function confirmar(){
+  const mensaje=`Hola! Soy ${nombre || "invitado"} y confirmo asistencia al cumple 🎉`;
+  const telefono="549XXXXXXXXXX";
 
-  const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
-  window.open(url, '_blank');
+  window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`,'_blank');
 }
 
 </script>
