@@ -3,274 +3,216 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>¡Cumpleaños de Mateo! 🕷️</title>
+<title>Invitación Spider 🕷️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --red: #E3000F;
-  --blue: #003082;
-  --darkblue: #001a4d;
-  --yellow: #FFD700;
-  --white: #ffffff;
+  --red:#E3000F;
+  --blue:#003082;
+  --darkblue:#001a4d;
+  --yellow:#FFD700;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background-color: var(--darkblue);
-  font-family: 'Nunito', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  cursor: crosshair;
+/* BODY */
+body{
+  margin:0;
+  font-family:'Nunito',sans-serif;
+  background:var(--darkblue);
+  overflow:hidden;
 }
 
-/* INTRO */
-#intro {
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: radial-gradient(circle,#001a4d,#000);
+/* ===== SOBRE ===== */
+#sobre{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:#000;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   z-index:9999;
-  color:white;
+}
+
+.envelope{
+  width:260px;
+  height:160px;
+  background:#111;
+  position:relative;
   cursor:pointer;
+  perspective:1000px;
 }
 
-#intro span {
-  font-size:70px;
-  animation:pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-}
-
-.fadeOut {
-  animation:fadeOut .7s forwards;
-}
-
-@keyframes fadeOut {
-  to{opacity:0; transform:scale(1.3);}
-}
-
-/* Fondo telaraña */
-.web-bg {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 0;
-  opacity: 0.07;
-  background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(255,255,255,0.5) 49px, rgba(255,255,255,0.5) 50px),
-    repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(255,255,255,0.5) 49px, rgba(255,255,255,0.5) 50px);
-  background-size: 50px 50px;
-  animation: webMove 20s linear infinite;
-}
-
-@keyframes webMove {
-  0% { transform: translate(0,0); }
-  100% { transform: translate(50px, 50px); }
-}
-
-/* Partículas */
-.particles {
-  position: fixed;
-  width:100%; height:100%;
-  z-index:0;
-  pointer-events:none;
-}
-
-.particle {
+/* tapa */
+.flap{
   position:absolute;
-  width:6px; height:6px;
-  border-radius:50%;
-  animation:float linear infinite;
-}
-
-@keyframes float {
-  0%{transform:translateY(100vh); opacity:0;}
-  10%,90%{opacity:1;}
-  100%{transform:translateY(-100px); opacity:0;}
-}
-
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Hero */
-.hero {
-  text-align: center;
-  padding: 30px 0 10px;
-}
-
-.spider-icon {
-  width: 120px;
-  height: 120px;
-  animation: spiderPulse 2s infinite;
-}
-
-@keyframes spiderPulse {
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.1);}
-}
-
-/* Card */
-.card {
-  background: linear-gradient(145deg, var(--blue), var(--darkblue));
-  border: 3px solid var(--red);
-  border-radius: 24px;
-  padding: 30px 24px;
-  margin-bottom: 16px;
-}
-
-.birthday-name {
-  font-family: 'Bangers';
-  font-size: 64px;
-  text-align: center;
-  color: white;
-}
-
-.birthday-age {
-  text-align:center;
-  color: var(--yellow);
-  margin-bottom:20px;
-}
-
-/* RSVP */
-.rsvp-card {
-  border:3px solid var(--yellow);
-  border-radius:20px;
-  padding:20px;
-}
-
-.rsvp-input {
   width:100%;
-  padding:12px;
-  margin-bottom:10px;
+  height:100%;
+  background:linear-gradient(135deg,#003082,#001a4d);
+  clip-path:polygon(0 0,100% 0,50% 70%);
+  transform-origin:top;
+  transition:transform 0.8s ease;
 }
 
-.rsvp-buttons {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
+/* cuerpo */
+.body{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(145deg,#003082,#001a4d);
+  border:2px solid #E3000F;
 }
 
-.btn-confirm {
-  background:#00c853;
-  border:none;
-  padding:12px;
+/* efecto abierto */
+.open .flap{
+  transform:rotateX(180deg);
+}
+
+/* TEXTO */
+#sobre p{
+  position:absolute;
+  bottom:-50px;
   color:white;
 }
 
-.btn-decline {
-  background:#555;
-  border:none;
-  padding:12px;
+/* ===== CONTENIDO ===== */
+#contenido{
+  display:none;
+  overflow-y:auto;
+  height:100vh;
+}
+
+/* fondo telaraña */
+.web-bg{
+  position:fixed;
+  width:100%;
+  height:100%;
+  opacity:0.07;
+  background-image:
+  repeating-linear-gradient(0deg,transparent,transparent 49px,white 50px),
+  repeating-linear-gradient(90deg,transparent,transparent 49px,white 50px);
+  background-size:50px 50px;
+  animation:webMove 20s linear infinite;
+}
+
+@keyframes webMove{
+  to{transform:translate(50px,50px);}
+}
+
+.container{
+  position:relative;
+  z-index:1;
+  max-width:480px;
+  margin:auto;
+  padding:20px;
+  text-align:center;
+}
+
+/* CARD */
+.card{
+  background:linear-gradient(145deg,#003082,#001a4d);
+  border:3px solid #E3000F;
+  border-radius:20px;
+  padding:25px;
+}
+
+h1{
+  font-family:'Bangers';
+  font-size:60px;
   color:white;
 }
 
-.rsvp-message { display:none; }
+/* BOTON MUSICA */
+.music-btn{
+  position:fixed;
+  top:10px;
+  right:10px;
+  background:#000000aa;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+  z-index:10;
+}
 
 </style>
 </head>
 
 <body>
 
-<div id="intro" onclick="abrir()">
-<span>🕷️</span>
-<p>Tocá para abrir la invitación</p>
+<!-- SOBRE -->
+<div id="sobre">
+  <div class="envelope" onclick="abrir()">
+    <div class="flap"></div>
+    <div class="body"></div>
+  </div>
+  <p>🕷️ Tocá para abrir</p>
 </div>
 
+<!-- CONTENIDO -->
 <div id="contenido">
 
 <div class="web-bg"></div>
-<div class="particles" id="particles"></div>
+
+<button class="music-btn" onclick="toggleMusic()">🔊 Música</button>
 
 <div class="container">
 
 <div id="saludo"></div>
 
-<div class="hero">
-<svg class="spider-icon" viewBox="0 0 120 120">
-<circle cx="60" cy="60" r="58" fill="#E3000F"/>
-</svg>
-</div>
-
 <div class="card">
-<div class="birthday-name">MATEO</div>
-<div class="birthday-age">🎉 Cumple 6 años 🎉</div>
+<h1>MATEO</h1>
+<h3 style="color:gold;">🎉 Cumple 6 años 🎉</h3>
 <p>📅 25 Abril</p>
-<p>🕓 16:00</p>
+<p>🕓 16:00 hs</p>
 <p>📍 Salón El Castillo</p>
 </div>
 
-<div class="rsvp-card">
-<input id="guestName" class="rsvp-input" placeholder="Tu nombre">
-<div class="rsvp-buttons">
-<button class="btn-confirm" onclick="confirmRSVP(true)">SI</button>
-<button class="btn-decline" onclick="confirmRSVP(false)">NO</button>
-</div>
-<div id="rsvpMessage" class="rsvp-message"></div>
-</div>
-
 </div>
 </div>
 
-<audio id="sonido">
+<!-- AUDIO -->
+<audio id="openSound">
 <source src="https://assets.mixkit.co/sfx/preview/mixkit-fast-woosh-transition-3108.mp3">
+</audio>
+
+<audio id="bgMusic" loop>
+<source src="https://assets.mixkit.co/music/preview/mixkit-kids-party-132.mp3">
 </audio>
 
 <script>
 
-// intro
+// abrir sobre
 function abrir(){
-document.getElementById("sonido").play();
-document.getElementById("intro").classList.add("fadeOut");
+document.querySelector(".envelope").classList.add("open");
+
+document.getElementById("openSound").play();
+
 setTimeout(()=>{
-document.getElementById("intro").style.display="none";
+document.getElementById("sobre").style.display="none";
 document.getElementById("contenido").style.display="block";
-},700);
+document.getElementById("bgMusic").play();
+},900);
 }
 
-// nombre
+// nombre personalizado
 const params=new URLSearchParams(window.location.search);
 const nombre=params.get("nombre");
 
 if(nombre){
-document.getElementById("saludo").innerHTML=`<h2 style="text-align:center;color:gold;">Hola ${nombre}</h2>`;
+document.getElementById("saludo").innerHTML=`<h2 style="color:gold;">Hola ${nombre} 👋</h2>`;
 }
 
-// partículas
-const container=document.getElementById('particles');
-for(let i=0;i<15;i++){
-const el=document.createElement('div');
-el.className='particle';
-el.style.left=Math.random()*100+'%';
-el.style.animationDuration=(5+Math.random()*10)+'s';
-container.appendChild(el);
-}
+// toggle musica
+function toggleMusic(){
+const music=document.getElementById("bgMusic");
 
-// RSVP
-function confirmRSVP(attending){
-const name=document.getElementById('guestName').value;
-
-const msg=document.getElementById('rsvpMessage');
-msg.style.display='block';
-
-if(attending){
-msg.innerHTML=`Genial ${name}!`;
+if(music.paused){
+music.play();
 }else{
-msg.innerHTML=`Lástima ${name}`;
+music.pause();
 }
 }
 
