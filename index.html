@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invitación Spider 🕷️</title>
+
+<style>
+  body {
+    margin:0;
+    font-family: Arial;
+    background:#001a4d;
+    color:white;
+    overflow:hidden;
+  }
+
+  /* INTRO */
+  #intro {
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    background: radial-gradient(circle, #001a4d, #000);
+    text-align:center;
+  }
+
+  #intro img {
+    width:180px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+  }
+
+  #intro p {
+    margin-top:15px;
+    font-size:18px;
+    opacity:0.8;
+  }
+
+  /* EFECTO DESAPARECER */
+  .fadeOut {
+    animation: fadeOut 0.6s forwards;
+  }
+
+  @keyframes fadeOut {
+    to {
+      opacity:0;
+      transform:scale(1.2);
+    }
+  }
+
+  /* CONTENIDO */
+  #contenido {
+    display:none;
+    padding:20px;
+    text-align:center;
+  }
+
+  .card {
+    background:#003082;
+    padding:20px;
+    border-radius:20px;
+    border:3px solid red;
+    animation: aparecer 1s ease;
+  }
+
+  @keyframes aparecer {
+    from {opacity:0; transform:translateY(40px);}
+    to {opacity:1; transform:translateY(0);}
+  }
+
+  h1 {
+    font-size:40px;
+    margin:10px 0;
+  }
+
+  .btn {
+    margin-top:20px;
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    background:#00c853;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+  }
+
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="intro" onclick="abrirInvitacion()">
+  <img src="https://cdn-icons-png.flaticon.com/512/646/646094.png">
+  <p>🕷️ Tocá para abrir la invitación</p>
+</div>
+
+<!-- CONTENIDO -->
+<div id="contenido">
+  <div id="saludo"></div>
+
+  <div class="card">
+    <h1>MATEO</h1>
+    <p>🎉 Cumple 6 años 🎉</p>
+    <p>📅 Sábado 25 de Abril</p>
+    <p>🕓 16:00 hs</p>
+    <p>📍 Salón El Castillo</p>
+
+    <button class="btn" onclick="confirmar()">Confirmar por WhatsApp</button>
+  </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="sonido">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-fast-woosh-transition-3108.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+function abrirInvitacion() {
+  document.getElementById("sonido").play();
+
+  const intro = document.getElementById("intro");
+  intro.classList.add("fadeOut");
+
+  setTimeout(() => {
+    intro.style.display = "none";
+    document.getElementById("contenido").style.display = "block";
+  }, 600);
+}
+
+
+// PERSONALIZACIÓN POR NOMBRE
+const params = new URLSearchParams(window.location.search);
+const nombre = params.get("nombre");
+
+if (nombre) {
+  document.getElementById("saludo").innerHTML =
+    `<h2>👋 Hola ${nombre}, estás invitado</h2>`;
+}
+
+
+// WHATSAPP
+function confirmar() {
+  const mensaje = `Hola! Soy ${nombre || "invitado"} y confirmo asistencia al cumple 🎉`;
+  const telefono = "549XXXXXXXXXX"; // CAMBIAR
+
+  const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, '_blank');
+}
+
+</script>
+
+</body>
+</html>
