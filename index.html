@@ -6,88 +6,130 @@
 <title>Invitación Spider 🕷️</title>
 
 <style>
-:root {
-  --red:#E3000F;
-  --blue:#003082;
-  --darkblue:#001a4d;
-  --yellow:#FFD700;
-  --white:#ffffff;
+:root{
+--red:#E3000F;
+--blue:#003082;
+--darkblue:#001a4d;
+--yellow:#FFD700;
 }
 
 body{
-  margin:0;
-  font-family:'Arial';
-  background:var(--darkblue);
-  overflow:hidden;
+margin:0;
+font-family:Arial;
+background:var(--darkblue);
+overflow:hidden;
 }
 
-/* INTRO SOBRE */
+/* INTRO */
 #intro{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  background:radial-gradient(circle,#001a4d,#000);
-  color:white;
-  cursor:pointer;
-  text-align:center;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+color:white;
+cursor:pointer;
+background:radial-gradient(circle,#001a4d,#000);
 }
 
-#intro img{
-  width:180px;
-  animation:pulse 2s infinite;
+#intro h1{
+font-size:24px;
+}
+
+#intro span{
+font-size:60px;
+animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.1);}
+0%,100%{transform:scale(1);}
+50%{transform:scale(1.2);}
 }
 
 .fadeOut{
-  animation:fadeOut .6s forwards;
+animation:fadeOut .7s forwards;
 }
 
 @keyframes fadeOut{
-  to{opacity:0;transform:scale(1.3);}
+to{opacity:0;transform:scale(1.3);}
 }
 
-/* CONTENIDO ORIGINAL */
+/* CONTENIDO */
 #contenido{
-  display:none;
-  height:100vh;
-  overflow-y:auto;
+display:none;
+height:100vh;
+overflow:auto;
+padding:20px;
 }
 
-.container{
-  max-width:480px;
-  margin:auto;
-  padding:20px;
-  text-align:center;
+/* FONDO TELARAÑA */
+.web{
+position:fixed;
+width:100%;
+height:100%;
+background-image: linear-gradient(0deg,transparent 49px,rgba(255,255,255,.1) 50px),
+linear-gradient(90deg,transparent 49px,rgba(255,255,255,.1) 50px);
+background-size:50px 50px;
+opacity:.2;
 }
 
+/* TARJETA */
 .card{
-  background:linear-gradient(145deg,var(--blue),var(--darkblue));
-  border:3px solid var(--red);
-  border-radius:20px;
-  padding:25px;
-  margin-top:20px;
+max-width:420px;
+margin:auto;
+background:linear-gradient(145deg,var(--blue),#001a4d);
+border:3px solid var(--red);
+border-radius:20px;
+padding:25px;
+text-align:center;
+box-shadow:0 0 30px rgba(227,0,15,.4);
+animation:aparecer 1s ease;
+}
+
+@keyframes aparecer{
+from{opacity:0;transform:translateY(40px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 h1{
-  font-size:50px;
-  color:white;
+font-size:50px;
+color:white;
+margin:10px 0;
 }
 
+h2{
+color:var(--yellow);
+}
+
+/* COUNTDOWN */
+.count{
+display:flex;
+justify-content:center;
+gap:10px;
+margin:20px 0;
+}
+
+.count div{
+background:#00000070;
+padding:10px;
+border-radius:10px;
+}
+
+.count span{
+font-size:24px;
+display:block;
+}
+
+/* BOTON */
 .btn{
-  margin-top:15px;
-  padding:12px 18px;
-  border:none;
-  border-radius:10px;
-  background:#00c853;
-  color:white;
-  cursor:pointer;
-  font-size:16px;
+margin-top:15px;
+padding:12px 18px;
+border:none;
+border-radius:10px;
+background:#00c853;
+color:white;
+cursor:pointer;
+font-size:16px;
 }
 
 </style>
@@ -96,68 +138,90 @@ h1{
 <body>
 
 <!-- INTRO -->
-<div id="intro" onclick="abrirInvitacion()">
-  <img src="https://cdn-icons-png.flaticon.com/512/646/646094.png">
-  <p>🕷️ Tocá para abrir la invitación</p>
+<div id="intro" onclick="abrir()">
+<span>🕷️</span>
+<h1>Tocá para abrir</h1>
 </div>
 
-<!-- CONTENIDO REAL -->
+<!-- CONTENIDO -->
 <div id="contenido">
 
-<div class="container">
+<div class="web"></div>
 
-  <div id="saludo"></div>
+<div id="saludo" style="text-align:center;"></div>
 
-  <div class="card">
-    <h1>MATEO</h1>
-    <h3 style="color:gold;">🎉 Cumple 6 años 🎉</h3>
+<div class="card">
+<h1>MATEO</h1>
+<h2>🎉 Cumple 6 años 🎉</h2>
 
-    <p>📅 Sábado 25 de Abril</p>
-    <p>🕓 16:00 hs</p>
-    <p>📍 Salón El Castillo</p>
+<p>📅 25 de Abril</p>
+<p>🕓 16:00 hs</p>
+<p>📍 Salón El Castillo</p>
 
-    <button class="btn" onclick="confirmar()">Confirmar por WhatsApp</button>
-  </div>
+<div class="count">
+<div><span id="d">--</span>D</div>
+<div><span id="h">--</span>H</div>
+<div><span id="m">--</span>M</div>
+<div><span id="s">--</span>S</div>
+</div>
+
+<button class="btn" onclick="confirmar()">Confirmar por WhatsApp</button>
 
 </div>
 
 </div>
 
-<!-- AUDIO -->
 <audio id="sonido">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-fast-woosh-transition-3108.mp3">
+<source src="https://assets.mixkit.co/sfx/preview/mixkit-fast-woosh-transition-3108.mp3">
 </audio>
 
 <script>
 
-// ABRIR SOBRE
-function abrirInvitacion(){
-  document.getElementById("sonido").play();
+// abrir
+function abrir(){
+document.getElementById("sonido").play();
+document.getElementById("intro").classList.add("fadeOut");
 
-  const intro=document.getElementById("intro");
-  intro.classList.add("fadeOut");
-
-  setTimeout(()=>{
-    intro.style.display="none";
-    document.getElementById("contenido").style.display="block";
-  },600);
+setTimeout(()=>{
+document.getElementById("intro").style.display="none";
+document.getElementById("contenido").style.display="block";
+},700);
 }
 
-// NOMBRE PERSONALIZADO
+// nombre
 const params=new URLSearchParams(window.location.search);
 const nombre=params.get("nombre");
 
 if(nombre){
-  document.getElementById("saludo").innerHTML=
-  `<h2 style="color:gold;">👋 Hola ${nombre}</h2>`;
+document.getElementById("saludo").innerHTML=`<h2>Hola ${nombre} 👋</h2>`;
 }
 
-// WHATSAPP
-function confirmar(){
-  const mensaje=`Hola! Soy ${nombre || "invitado"} y confirmo asistencia al cumple 🎉`;
-  const telefono="549XXXXXXXXXX";
+// countdown
+function actualizar(){
+const evento=new Date("2026-04-25T16:00:00");
+const ahora=new Date();
+const diff=evento-ahora;
 
-  window.open(`https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`,'_blank');
+if(diff<=0)return;
+
+const d=Math.floor(diff/86400000);
+const h=Math.floor(diff%86400000/3600000);
+const m=Math.floor(diff%3600000/60000);
+const s=Math.floor(diff%60000/1000);
+
+document.getElementById("d").textContent=d;
+document.getElementById("h").textContent=h;
+document.getElementById("m").textContent=m;
+document.getElementById("s").textContent=s;
+}
+
+setInterval(actualizar,1000);
+actualizar();
+
+// whatsapp
+function confirmar(){
+const msg=`Hola! Soy ${nombre || "invitado"} y confirmo asistencia 🎉`;
+window.open(`https://wa.me/549XXXXXXXXXX?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
 </script>
